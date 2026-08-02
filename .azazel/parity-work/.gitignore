@@ -1,0 +1,3 @@
+build_spec.zig
+zig-cache/
+zig-out/

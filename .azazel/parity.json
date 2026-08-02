@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "repo": "libxev",
+  "baseline": {
+    "command": [
+      "zig",
+      "build",
+      "--help"
+    ],
+    "expected_classification": "zig-api-drift",
+    "preferred_zig": "0.16"
+  },
+  "build": {
+    "command": [
+      "zig",
+      "build",
+      "--summary",
+      "all"
+    ],
+    "zig": "0.16.0",
+    "expected_classification": "ok"
+  },
+  "azazel": {
+    "command": [
+      "azazel",
+      "parity",
+      "--manifest",
+      ".azazel/parity.json"
+    ],
+    "status": "scaffold-only",
+    "first_targets": [
+      "lib:xev",
+      "examples",
+      "benchmarks",
+      "manpage generation"
+    ],
+    "system_deps": [],
+    "required_tools": [],
+    "pkg_config_libs": [],
+    "replacement_gaps": [
+      "library variants",
+      "generated pkg-config/manpage outputs",
+      "test artifact checks"
+    ],
+    "integration_kind": "azazel",
+    "executable_parity": {
+      "status": "ready",
+      "command": [
+        "zig",
+        "build",
+        "--summary",
+        "all"
+      ],
+      "expected_classification": "ok",
+      "targets": [
+        "module:xev",
+        "exe:xev_probe"
+      ],
+      "workdir": ".azazel/parity-work"
+    }
+  }
+}

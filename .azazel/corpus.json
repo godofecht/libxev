@@ -1,0 +1,57 @@
+{
+  "name": "libxev",
+  "upstream": "mitchellh/libxev",
+  "fork": "godofecht/libxev",
+  "branch": "azazel-zaza-integration",
+  "notes": "library variants, examples, benches, manpage generation",
+  "status": "integration scaffold",
+  "preferred_zig": "0.16",
+  "baseline_command": [
+    "zig",
+    "build",
+    "--help"
+  ],
+  "build_zig": "0.16.0",
+  "build_command": [
+    "zig",
+    "build",
+    "--summary",
+    "all"
+  ],
+  "expected_build_classification": "ok",
+  "azazel_command": [
+    "azazel",
+    "parity",
+    "--manifest",
+    ".azazel/parity.json"
+  ],
+  "expected_baseline_classification": "zig-api-drift",
+  "first_targets": [
+    "lib:xev",
+    "examples",
+    "benchmarks",
+    "manpage generation"
+  ],
+  "system_deps": [],
+  "required_tools": [],
+  "pkg_config_libs": [],
+  "replacement_gaps": [
+    "library variants",
+    "generated pkg-config/manpage outputs",
+    "test artifact checks"
+  ],
+  "integration_kind": "azazel",
+  "parity_status": "scaffold-only",
+  "executable_parity_status": "ready",
+  "executable_parity_command": [
+    "zig",
+    "build",
+    "--summary",
+    "all"
+  ],
+  "expected_executable_parity_classification": "ok",
+  "executable_parity_targets": [
+    "module:xev",
+    "exe:xev_probe"
+  ]
+}
