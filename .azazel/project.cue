@@ -1,10 +1,11 @@
-// Azazel parity model for libxev.
+// Full Azazel parity model for libxev, using artifact_name (azazel #36).
 //
-// First target slice: `lib:xev`, the static library. Mirrors libxev/build.zig's
-// `addLibrary(.{ .linkage = .static, .name = "xev", .root_source_file =
-// "src/c_api.zig" })`. libxev's library is self-contained pure Zig (c_api.zig
-// imports main.zig relatively, no external package deps), so Azazel reproduces
-// it directly. Verified: `zig build` on 0.16.0 produces zig-out/lib/libxev.a.
+// libxev exposes both an importable Zig module named xev (src/main.zig, used via
+// @import("xev")) and a C-API static library also named xev (src/c_api.zig,
+// producing libxev.a). Before #36 a #Module's key was both its @import name and
+// its artifact name, so these two "xev" targets could not coexist. artifact_name
+// decouples them: the module keeps the "xev" key, and the static library uses a
+// distinct key while emitting the real libxev.a. Both primary targets modeled.
 package build
 
 toolchain: zig: {
@@ -13,6 +14,12 @@ toolchain: zig: {
 }
 
 xev: #Module & {
-	kind: "static"
-	root: "src/c_api.zig"
+	kind: "module"
+	root: "src/main.zig"
+}
+
+xev_lib: #Module & {
+	kind:          "static"
+	root:          "src/c_api.zig"
+	artifact_name: "xev"
 }
